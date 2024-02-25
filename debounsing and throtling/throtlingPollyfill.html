@@ -24,15 +24,27 @@ const count= document.querySelector(".increment_count");
 let pressdCount=0;
 let triggerCount=0;
 
-// using lodash library
-// isme 800 ms ka agar gap ho gya rukne ke bad tb hi  bdega nhi to nhi pr thritleme every 800 ms pe bdta h chec hm count krna bnd kr ya nhi phe vla. button pressd ko
-const debountCount=_.debounce(()=>{
+
+const myTrottle= (callback,delay)=>{
+    let last=0;
+    return (...args)=>{
+        let now= new Date().getTime();
+    if((now-last)<delay) return;
+    last= now;
+    return callback(...args);
+    }
+   
+}
+
+const throtleFunc= myTrottle(()=>{
+ 
+    
     count.innerHTML=++triggerCount;
-},800)
+}, 2000)
 
 btn.addEventListener("click",()=>{
     btnPress.innerHTML=++pressdCount;
-    debountCount();
+    throtleFunc();
 })
 
 </script>

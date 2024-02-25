@@ -7,8 +7,8 @@
 </head>
 <body>
     <div >
-        <h1>Subscriibe to roadside coder <br/>
-        else you will  have bad dreams today.
+        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, maiores?<br/>
+        Lorem ipsum dolor sit amet.
     </h1>
     </div>
 <button class="increment_btn">Increment</button>
@@ -24,9 +24,19 @@ const count= document.querySelector(".increment_count");
 let pressdCount=0;
 let triggerCount=0;
 
-// using lodash library
-// isme 800 ms ka agar gap ho gya rukne ke bad tb hi  bdega nhi to nhi pr thritleme every 800 ms pe bdta h chec hm count krna bnd kr ya nhi phe vla. button pressd ko
-const debountCount=_.debounce(()=>{
+const myDebouceFunction= (callback,delay)=>{
+let timer;
+return function(...args){
+    if(timer) clearTimeout(timer);
+    timer=setTimeout(()=>{
+callback(...args)
+    },delay)
+}
+
+}
+
+
+const debountCount=myDebouceFunction(()=>{
     count.innerHTML=++triggerCount;
 },800)
 

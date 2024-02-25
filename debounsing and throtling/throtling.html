@@ -25,14 +25,18 @@ let pressdCount=0;
 let triggerCount=0;
 
 // using lodash library
-// isme 800 ms ka agar gap ho gya rukne ke bad tb hi  bdega nhi to nhi pr thritleme every 800 ms pe bdta h chec hm count krna bnd kr ya nhi phe vla. button pressd ko
-const debountCount=_.debounce(()=>{
+// isme hr 800 ms me bdega
+const start= new Date().getTime();
+// console.log("Time:",start);
+const throtleFunc= _.throttle(()=>{
+    const now= new Date().getTime();
+    console.log(now-start);
     count.innerHTML=++triggerCount;
-},800)
+}, 800)
 
 btn.addEventListener("click",()=>{
     btnPress.innerHTML=++pressdCount;
-    debountCount();
+    throtleFunc();
 })
 
 </script>
